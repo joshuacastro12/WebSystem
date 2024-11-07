@@ -1,0 +1,170 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM & DEMON SLAYER Example</title> 
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .modal {
+            display: none;
+            background-color: rgba(243, 235, 235, 0.151);
+            border-radius: 12px;
+            padding: 30px;
+            width: 600px;
+            transition: transform 0.6s ease, opacity 0.6s ease;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .background1, .background2, .background3 {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 0.6s ease;
+        }
+
+        .background1 {
+            background-image: url('image/R.gif'); /* Replace with your image URL */
+        }
+
+        .background2 {
+            background-image: url('image/T.gif'); /* Replace with your image URL */
+        }
+
+        .background3 {
+            background-image: url('image/O.gif'); /* Replace with your image URL */
+        }
+
+        .background1.active, .background2.active, .background3.active {
+            display: block;
+            z-index: 1;
+            opacity: 1;
+        }
+
+        button {
+            background: linear-gradient(45deg, #007BFF, #00BFFF);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: background 0.4s, transform 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #0056b3, #0099cc);
+            transform: translateY(-2px);
+        }
+
+        button:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button id="showDOMModal">Show DOM Modal</button>
+
+        <!-- Modal 1 (DOM Modal) -->
+        <div class="modal" id="modal1">
+            <h1>Welcome to the DOM World!</h1>
+            <img src="image/L.gif" alt="Scenic Image" width="400" style="border-radius: 12px;">
+            <p>Click the button to explore more!</p>
+            <button id="domButton">Click Here!</button>
+        </div>
+
+        <!-- Modal 2 (Piggy Modal) -->
+        <div class="modal" id="modal2">
+            <h1>Hello World! Im taylor Swift!</h1>
+            <img src="image/Q.gif" alt="Lucy Image" width="400" style="border-radius: 12px;">
+            <p>I'm TAYLOR SWIFT</p>
+            <button id="LuffyButton">Click Here!</button>
+        </div>
+
+        <!-- Modal 3 (New Modal) -->
+        <div class="modal" id="modal3">
+            <h1>Welcome to the Third Modal!</h1>
+            <img src="image/P.gif" alt="Another Image" width="400" style="border-radius: 12px;">
+            <p>This is the third modal content!</p>
+            <button id="thirdButton">Click Here!</button>
+        </div>
+    </div>
+
+    <!-- Backgrounds -->
+    <div class="background1" id="background1"></div>
+    <div class="background2" id="background2"></div>
+    <div class="background3" id="background3"></div>
+
+    <script>
+        // Event handler for showing the initial DOM Modal
+        document.getElementById('showDOMModal').addEventListener('click', () => showModal('modal1'));
+
+        // Event handler for button click inside DOM Modal
+        document.getElementById('domButton').addEventListener('click', () => {
+            showModal('modal2');
+        });
+
+        // Event handler for button click inside Piggy Modal
+        document.getElementById('LuffyButton').addEventListener('click', () => {
+            showModal('modal3');
+        });
+
+        // Event handler for button click inside the third modal
+        document.getElementById('thirdButton').addEventListener('click', () => {
+            alert('Third Button clicked! Explore more...');
+        });
+
+        // Function to show modals and change backgrounds with smooth transitions
+        function showModal(modalId) {
+            // Hide all modals and reset backgrounds
+            document.querySelectorAll('.modal').forEach(modal => modal.classList.remove('active'));
+            document.querySelectorAll('.background1, .background2, .background3').forEach(bg => bg.classList.remove('active'));
+
+            // Show the selected modal
+            document.getElementById(modalId).classList.add('active');
+
+            // Set the background based on the modal
+            if (modalId === 'modal1') {
+                document.getElementById('background1').classList.add('active');
+            } else if (modalId === 'modal2') {
+                document.getElementById('background2').classList.add('active');
+            } else if (modalId === 'modal3') {
+                document.getElementById('background3').classList.add('active');
+            }
+        }
+
+        // Initialize by showing the first modal and background
+        showModal('modal1');
+    </script>
+</body>
+</html>
